@@ -98,6 +98,28 @@
     background: linear-gradient(135deg, #1a1f2c 0%, #2d1b69 50%, #1a1f2c 100%);
   }
 
+  .house-bg {
+    background: linear-gradient(
+      135deg,
+      #8b4513 0%,
+      #d2691e 30%,
+      #f4a460 70%,
+      #deb887 100%
+    );
+  }
+
+  .living-room-bg {
+    background: linear-gradient(135deg, #8b4513 0%, #a0522d 50%, #cd853f 100%);
+  }
+
+  .kitchen-bg {
+    background: linear-gradient(135deg, #228b22 0%, #32cd32 50%, #90ee90 100%);
+  }
+
+  .computer-bg {
+    background: linear-gradient(135deg, #191970 0%, #4169e1 50%, #6495ed 100%);
+  }
+
   .retro-glow {
     box-shadow:
       0 0 10px #9b87f5,

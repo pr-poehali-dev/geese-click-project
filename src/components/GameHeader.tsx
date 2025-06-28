@@ -1,51 +1,89 @@
 import React from "react";
+import { GooseState } from "@/pages/Index";
 
 interface GameHeaderProps {
-  score: number;
-  timeLeft: number;
-  combo: number;
-  highScore: number;
+  money: number;
+  timeOfDay: string;
+  gooseState: GooseState;
 }
 
 const GameHeader: React.FC<GameHeaderProps> = ({
-  score,
-  timeLeft,
-  combo,
-  highScore,
+  money,
+  timeOfDay,
+  gooseState,
 }) => {
+  const getTimeEmoji = () => {
+    switch (timeOfDay) {
+      case "утро":
+        return "🌅";
+      case "день":
+        return "☀️";
+      case "вечер":
+        return "🌆";
+      case "ночь":
+        return "🌙";
+      default:
+        return "🕐";
+    }
+  };
+
+  const getStatusColor = (value: number, reverse = false) => {
+    if (reverse) {
+      if (value > 70) return "text-red-400";
+      if (value > 40) return "text-orange-400";
+      return "text-green-400";
+    } else {
+      if (value > 70) return "text-green-400";
+      if (value > 40) return "text-orange-400";
+      return "text-red-400";
+    }
+  };
+
   return (
-    <div className="flex justify-between items-center p-6 bg-gradient-to-r from-purple-900/50 to-blue-900/50 border-b-2 border-purple-500">
-      <div className="flex space-x-8">
+    <div className="flex justify-between items-center p-4 bg-gradient-to-r from-amber-900/50 to-orange-900/50 border-b-2 border-amber-600">
+      <div className="flex space-x-6">
         <div className="text-center">
-          <div className="pixel-font text-2xl text-purple-300">СЧЁТ</div>
-          <div className="pixel-font text-4xl text-white retro-glow">
-            {score.toLocaleString()}
+          <div className="pixel-font text-lg text-amber-300">ДЕНЬГИ</div>
+          <div className="pixel-font text-2xl text-white golden-glow">
+            💰 {money}₽
           </div>
         </div>
 
         <div className="text-center">
-          <div className="pixel-font text-2xl text-orange-300">КОМБО</div>
+          <div className="pixel-font text-lg text-blue-300">ВРЕМЯ</div>
+          <div className="pixel-font text-2xl text-white">
+            {getTimeEmoji()} {timeOfDay}
+          </div>
+        </div>
+      </div>
+
+      <div className="flex space-x-4">
+        <div className="text-center">
+          <div className="pixel-font text-sm text-pink-300">ГОЛОД</div>
           <div
-            className={`pixel-font text-4xl ${combo > 5 ? "text-orange-400 golden-glow" : "text-white"}`}
+            className={`pixel-font text-xl ${getStatusColor(gooseState.hunger, true)}`}
           >
-            {combo}x
+            🍽️ {Math.round(gooseState.hunger)}%
           </div>
         </div>
-      </div>
 
-      <div className="text-center">
-        <div className="pixel-font text-2xl text-green-300">ВРЕМЯ</div>
-        <div
-          className={`pixel-font text-4xl ${timeLeft <= 10 ? "text-red-400 animate-pulse" : "text-white"}`}
-        >
-          {timeLeft}с
+        <div className="text-center">
+          <div className="pixel-font text-sm text-green-300">СЧАСТЬЕ</div>
+          <div
+            className={`pixel-font text-xl ${getStatusColor(gooseState.happiness)}`}
+          >
+            😊 {Math.round(gooseState.happiness)}%
+          </div>
         </div>
-      </div>
 
-      <div className="text-center">
-        <div className="pixel-font text-2xl text-cyan-300">РЕКОРД</div>
-        <div className="pixel-font text-4xl text-cyan-400 rare-glow">
-          {highScore.toLocaleString()}
+        <div className="text-center">
+          <div className="pixel-font text-sm text-purple-300">НАСТРОЕНИЕ</div>
+          <div className="pixel-font text-xl text-white">
+            {gooseState.mood === "happy" && "😊"}
+            {gooseState.mood === "neutral" && "😐"}
+            {gooseState.mood === "angry" && "😠"}
+            {gooseState.mood === "hungry" && "🤤"}
+          </div>
         </div>
       </div>
     </div>
