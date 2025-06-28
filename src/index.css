@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -35,47 +36,32 @@
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
-
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
-
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-
     --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 11.2%;
-
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
-
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
-
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
-
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
@@ -97,5 +83,84 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: "Orbitron", monospace;
+  }
+}
+
+@layer components {
+  .pixel-font {
+    font-family: "Orbitron", monospace;
+    font-weight: 700;
+    text-rendering: optimizeSpeed;
+  }
+
+  .game-bg {
+    background: linear-gradient(135deg, #1a1f2c 0%, #2d1b69 50%, #1a1f2c 100%);
+  }
+
+  .retro-glow {
+    box-shadow:
+      0 0 10px #9b87f5,
+      0 0 20px #9b87f5,
+      0 0 30px #9b87f5;
+  }
+
+  .golden-glow {
+    box-shadow:
+      0 0 15px #f97316,
+      0 0 30px #f97316,
+      0 0 45px #f97316;
+  }
+
+  .rare-glow {
+    box-shadow:
+      0 0 20px #0ea5e9,
+      0 0 40px #0ea5e9,
+      0 0 60px #0ea5e9;
+  }
+
+  .score-popup {
+    animation: scoreFloat 1s ease-out forwards;
+  }
+
+  .goose-click {
+    animation: gooseClick 0.3s ease-out;
+  }
+
+  .combo-flash {
+    animation: comboFlash 0.5s ease-out;
+  }
+}
+
+@keyframes scoreFloat {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-60px) scale(1.5);
+  }
+}
+
+@keyframes gooseClick {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes comboFlash {
+  0%,
+  100% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: rgba(155, 135, 245, 0.3);
   }
 }
